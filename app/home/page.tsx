@@ -92,9 +92,15 @@ export default function Home() {
               key={i}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
+              // EXPERT UPGRADE: 3D scale and slate glow on hover applied here too
+              whileHover={{ 
+                scale: 1.01, 
+                backgroundColor: "rgba(30, 41, 59, 0.4)", 
+                boxShadow: "0 0 20px rgba(148, 163, 184, 0.1)" 
+              }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group border-t border-zinc-800/50 last:border-b hover:bg-gradient-to-r hover:from-zinc-900/0 hover:via-slate-800/20 hover:to-zinc-900/0 transition-all duration-500"
+              className="group border-t border-zinc-800/50 last:border-b hover:bg-gradient-to-r hover:from-zinc-900/0 hover:via-slate-800/20 hover:to-zinc-900/0 transition-all duration-500 rounded-lg"
             >
               {item.internal ? (
                 <Link href={item.url} className="flex items-center py-6 px-4 w-full cursor-pointer overflow-hidden relative">

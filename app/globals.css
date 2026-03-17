@@ -1,26 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* We hardcode the dark theme for that cinematic "always-on" look */
+  --background: #030303;
+  --foreground: #d4d4d8; /* zinc-300 equivalent */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 1. SMOOTH SCROLLING: Makes the jump between /home and /archive feel premium */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* 2. FONT FIX: We remove Arial/Helvetica so your Space Grotesk/Mono take over */
+  font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevents accidental sideways "wobble" on mobile */
+}
+
+/* 3. CUSTOM SCROLLBAR: Standard scrollbars are "un-chill." This makes yours stealthy. */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030303;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a; /* zinc-800 */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46; /* zinc-700 */
+}
+
+/* 4. SELECTION COLOR: When someone highlights your text, it glows metallic slate */
+::selection {
+  background-color: rgba(148, 163, 184, 0.2);
+  color: #f8fafc;
 }

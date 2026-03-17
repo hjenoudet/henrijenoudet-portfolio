@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// 1. Swap out Geist for your custom tech fonts
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
+// 2. Upgraded Metadata for LinkedIn/Twitter previews
 export const metadata: Metadata = {
-  title: "Henri Jenoudet",
-  description: "Growth Marketing Analyst",
+  title: "Henri Jenoudet | Portfolio",
+  description: "Growth Marketing Analyst & Data Science Researcher.",
 };
 
 export default function RootLayout({
@@ -23,9 +25,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    // 3. Force "dark" mode and set the global background color immediately
+    <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-[#030303] text-zinc-300 antialiased`}
       >
         {children}
       </body>

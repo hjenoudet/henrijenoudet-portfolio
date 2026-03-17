@@ -39,7 +39,7 @@ export default function MoreProjects() {
         className="w-full max-w-3xl z-20 mt-4 flex justify-start"
       >
         <Link href="/home" className={`${mono.className} text-xs text-zinc-500 hover:text-slate-300 transition-colors flex items-center tracking-widest uppercase`}>
-          <span className="mr-2">&lt;</span> Return to Base
+          <span className="mr-2">&lt;</span> Return
         </Link>
       </motion.div>
 
@@ -54,7 +54,7 @@ export default function MoreProjects() {
           Project Archive
         </h1>
         <p className={`${mono.className} mt-6 text-xs tracking-[0.2em] uppercase text-zinc-500`}>
-          Data Science // Machine Learning // Modeling
+          Data Science // Marketing // Modeling
         </p>
       </motion.div>
 
@@ -66,9 +66,15 @@ export default function MoreProjects() {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              // EXPERT UPGRADE: 3D scale and slate glow on hover
+              whileHover={{ 
+                scale: 1.01, 
+                backgroundColor: "rgba(30, 41, 59, 0.4)", 
+                boxShadow: "0 0 20px rgba(148, 163, 184, 0.1)" 
+              }}
               viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group border-t border-zinc-800/50 last:border-b hover:bg-gradient-to-r hover:from-zinc-900/0 hover:via-slate-800/20 hover:to-zinc-900/0 transition-all duration-500"
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="group border-t border-zinc-800/50 last:border-b hover:bg-gradient-to-r hover:from-zinc-900/0 hover:via-slate-800/20 hover:to-zinc-900/0 transition-all duration-500 rounded-lg"
             >
               <a href={item.url} target="_blank" rel="noreferrer" className="flex items-center py-6 px-4 w-full cursor-pointer overflow-hidden relative">
                 <div className={`${mono.className} text-sm flex w-16 text-zinc-700 group-hover:text-slate-400 transition-colors duration-300`}>
