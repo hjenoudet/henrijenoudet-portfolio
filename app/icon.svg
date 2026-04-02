@@ -1,9 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <circle cx="256" cy="256" r="256" fill="#000000" />
-  
-  <g fill="#94a3b8">
-    <rect x="160" y="128" width="48" height="256" rx="4" />
-    <rect x="304" y="128" width="48" height="256" rx="4" />
-    <rect x="180" y="232" width="152" height="48" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+  </defs>
+  <path
+    fill="url(#g)"
+    d="M50 10
+       C55 10 59 12 62 14
+       L86 28
+       C90 30 92 34 92 39
+       L92 61
+       C92 66 90 70 86 72
+       L62 86
+       C59 88 55 90 50 90
+       C45 90 41 88 38 86
+       L14 72
+       C10 70 8 66 8 61
+       L8 39
+       C8 34 10 30 14 28
+       L38 14
+       C41 12 45 10 50 10
+       Z"
+  />
 </svg>

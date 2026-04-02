@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import Link from 'next/link';
 
 const glassClasses = "backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-4 shadow-2xl transition-colors hover:bg-white/10 pointer-events-auto";
 
@@ -55,6 +56,7 @@ export default function FloatingContent() {
     { name: 'media impact attribution', href: 'https://github.com/hjenoudet/media-impact-on-complaint-engagement' },
     { name: 'price sensitivity analysis', href: 'https://github.com/hjenoudet/price-sensitivity' },
     { name: 'sequence prediction & benchmarking', href: 'https://github.com/hjenoudet/fibo-models' },
+    { name: 'protein bar macro tracker', href: '/protein-bars-tracker', internal: true },
   ];
 
   return (
@@ -98,15 +100,25 @@ export default function FloatingContent() {
               className="overflow-hidden flex flex-col gap-3"
             >
               {analyticsProjects.map((project, idx) => (
-                <a
-                  key={idx}
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-zinc-400 hover:text-cyan-400 transition-colors lowercase border-l border-white/5 pl-3 py-0.5"
-                >
-                  {project.name}
-                </a>
+                'internal' in project ? (
+                  <Link
+                    key={idx}
+                    href={project.href}
+                    className="text-xs text-zinc-400 hover:text-cyan-400 transition-colors lowercase border-l border-white/5 pl-3 py-0.5"
+                  >
+                    {project.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={idx}
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-zinc-400 hover:text-cyan-400 transition-colors lowercase border-l border-white/5 pl-3 py-0.5"
+                  >
+                    {project.name}
+                  </a>
+                )
               ))}
             </motion.div>
           )}
