@@ -82,7 +82,7 @@ export default function FloatingContent() {
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <div className="flex justify-between items-center text-sm lowercase tracking-tight text-zinc-300 font-light">
-          <span>business analytics projects</span>
+          <span>data projects</span>
           <motion.span 
             animate={{ rotate: isDropdownOpen ? 180 : 0 }}
             className="text-[10px] ml-4 opacity-50"
