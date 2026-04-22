@@ -57,6 +57,7 @@ export default function FloatingContent() {
     { name: 'price sensitivity analysis', href: 'https://github.com/hjenoudet/price-sensitivity' },
     { name: 'sequence prediction & benchmarking', href: 'https://github.com/hjenoudet/fibo-models' },
     { name: 'protein bar macro tracker', href: '/protein-bars-tracker', internal: true },
+    { name: 'agricultural digital twin', href: '/ag-digital-twin', internal: true },
   ];
 
   return (
