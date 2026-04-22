@@ -157,6 +157,22 @@ export default function AgDigitalTwin() {
         </section>
 
       </div>
+      {/* <-- This closes your two-column grid */}
+
+      {/* COMPLIANCE / ATTRIBUTION FOOTER */}
+      <footer className="mt-12 pt-6 border-t border-slate-800 text-center text-slate-500 text-xs font-mono">
+        <p>
+          Biological imagery sourced from the{" "}
+          <a href="https://github.com/spMohanty/PlantVillage-Dataset" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-400 transition-colors">
+            PlantVillage Dataset
+          </a>.
+          <span className="mx-2">|</span>
+          Thermodynamics via{" "}
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-400 transition-colors">
+            Open-Meteo
+          </a>.
+        </p>
+      </footer>
     </div>
   );
 }
