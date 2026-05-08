@@ -12,7 +12,13 @@ interface TelemetryLog {
   p_value: number;
   is_anomaly: boolean;
   image_url: string;
-  llm_diagnostic: any;
+  llm_diagnostic?: {
+    disease: string;
+    robot_action: {
+      task: string;
+      params: Record<string, any>;
+    };
+  };
 }
 
 const ZONES = [
@@ -137,8 +143,21 @@ export default function AgDigitalTwin() {
                       {log.llm_diagnostic ? (
                         <div className="bg-black/50 p-3 rounded-md font-mono text-sm border border-red-900/30">
                           <div className="text-red-400 mb-1 text-xs">{"// Edge VLM Diagnosis"}</div>
-                          <div className="text-emerald-300">pathogen: <span className="text-white">"{log.llm_diagnostic.pathogen_detected}"</span></div>
-                          <div className="text-emerald-300">action: <span className="text-yellow-400">"{log.llm_diagnostic.recommended_action}"</span></div>
+                          <div className="text-emerald-300">pathogen: <span
+     className="text-white">"{log.llm_diagnostic?.disease}"</span></div>
+                          <div className="text-emerald-300">action: <span
+     className="text-yellow-400">"{log.llm_diagnostic?.robot_action?.task}"</span></div>
+                          
+                          {log.llm_diagnostic?.robot_action?.params && (
+                            <div className="mt-2 pt-2 border-t border-slate-800 text-[10px] text-slate-500 uppercase">
+                              {Object.entries(log.llm_diagnostic.robot_action.params).map(([key, val]) => (
+                                <div key={key} className="flex justify-between">
+                                  <span>{key.replace(/_/g, ' ')}</span>
+                                  <span className="text-slate-300">{String(val)}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       ) : (
                         <div className="text-yellow-500 animate-pulse text-sm font-mono mt-4 border border-yellow-900/50 bg-yellow-950/30 p-2 rounded">

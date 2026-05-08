@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 const glassClasses = "backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-4 shadow-2xl transition-colors hover:bg-white/10 pointer-events-auto";
 
-// FIX: Added the ": Variants" type here so TypeScript knows exactly what this is
 const floatingAnimation: Variants = {
   initial: { opacity: 0, scale: 0.9 },
   animate: (i: number) => ({
@@ -23,7 +22,13 @@ const floatingAnimation: Variants = {
   })
 };
 
-const Node = ({ children, className, i, href }: { children: React.ReactNode, className?: string, i: number, href?: string }) => {
+const Node = ({ children, className, i, href, internal }: { 
+  children: React.ReactNode, 
+  className?: string, 
+  i: number, 
+  href?: string,
+  internal?: boolean 
+}) => {
   const content = (
     <motion.div
       custom={i}
@@ -37,6 +42,13 @@ const Node = ({ children, className, i, href }: { children: React.ReactNode, cla
   );
 
   if (href) {
+    if (internal) {
+      return (
+        <Link href={href} className="contents">
+          {content}
+        </Link>
+      );
+    }
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className="contents">
         {content}
@@ -50,14 +62,13 @@ const Node = ({ children, className, i, href }: { children: React.ReactNode, cla
 export default function FloatingContent() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  // Removed internal projects from here as they are now promoted to their own nodes
   const analyticsProjects = [
     { name: 'algorithmic recommendation engine', href: 'https://github.com/hjenoudet/mutual-recommendations' },
     { name: 'causal inference modeling', href: 'https://github.com/hjenoudet/minimum-wages-and-food-insecurity' },
     { name: 'media impact attribution', href: 'https://github.com/hjenoudet/media-impact-on-complaint-engagement' },
     { name: 'price sensitivity analysis', href: 'https://github.com/hjenoudet/price-sensitivity' },
     { name: 'sequence prediction & benchmarking', href: 'https://github.com/hjenoudet/fibo-models' },
-    { name: 'protein bar macro tracker', href: '/protein-bars-tracker', internal: true },
-    { name: 'agricultural digital twin', href: '/ag-digital-twin', internal: true },
   ];
 
   return (
@@ -73,7 +84,17 @@ export default function FloatingContent() {
         work at the usda
       </Node>
 
-      {/* Node 3: Analytics Dropdown */}
+      {/* Node 5: Ag Digital Twin (Promoted to floating box) */}
+      <Node i={5} className="top-[55%] left-[12%] max-w-[150px]" href="/ag-digital-twin" internal>
+        agricultural digital twin
+      </Node>
+
+      {/* Node 6: Protein Bar Tracker (Promoted to floating box) */}
+      <Node i={6} className="top-[68%] left-[28%] max-w-[180px]" href="/protein-bars-tracker" internal>
+        protein bar macro tracker
+      </Node>
+
+      {/* Node 3: Analytics Dropdown (Renamed) */}
       <motion.div
         custom={3}
         initial="initial"
@@ -83,7 +104,7 @@ export default function FloatingContent() {
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <div className="flex justify-between items-center text-sm lowercase tracking-tight text-zinc-300 font-light">
-          <span>data projects</span>
+          <span>business analytics projects</span>
           <motion.span 
             animate={{ rotate: isDropdownOpen ? 180 : 0 }}
             className="text-[10px] ml-4 opacity-50"
@@ -101,25 +122,15 @@ export default function FloatingContent() {
               className="overflow-hidden flex flex-col gap-3"
             >
               {analyticsProjects.map((project, idx) => (
-                'internal' in project ? (
-                  <Link
-                    key={idx}
-                    href={project.href}
-                    className="text-xs text-zinc-400 hover:text-cyan-400 transition-colors lowercase border-l border-white/5 pl-3 py-0.5"
-                  >
-                    {project.name}
-                  </Link>
-                ) : (
-                  <a
-                    key={idx}
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-zinc-400 hover:text-cyan-400 transition-colors lowercase border-l border-white/5 pl-3 py-0.5"
-                  >
-                    {project.name}
-                  </a>
-                )
+                <a
+                  key={idx}
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-zinc-400 hover:text-cyan-400 transition-colors lowercase border-l border-white/5 pl-3 py-0.5"
+                >
+                  {project.name}
+                </a>
               ))}
             </motion.div>
           )}

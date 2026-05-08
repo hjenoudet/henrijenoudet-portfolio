@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     // 3. Force "dark" mode and set the global background color immediately
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" data-scroll-behavior="smooth">
       <body
         className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-[#030303] text-zinc-300 antialiased`}
       >
