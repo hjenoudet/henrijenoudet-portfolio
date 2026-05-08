@@ -22,11 +22,24 @@ interface TelemetryLog {
 }
 
 const ZONES = [
-  { id: 'Zone_1_Fresno', position: [-4, 0.5, -2] as const },
-  { id: 'Zone_2_Visalia', position: [0, 0.5, -2] as const },
-  { id: 'Zone_3_Bakersfield', position: [4, 0.5, -2] as const },
-  { id: 'Zone_4_Madera', position: [-2, 0.5, 2] as const },
-  { id: 'Zone_5_Merced', position: [2, 0.5, 2] as const },
+  // Row 1
+  { id: 'Zone_1_Fresno', position: [-4, 0.5, -4] as const },
+  { id: 'Zone_2_Seattle', position: [-2, 0.5, -4] as const },
+  { id: 'Zone_3_Bakersfield', position: [0, 0.5, -4] as const },
+  { id: 'Zone_4_Asheville', position: [2, 0.5, -4] as const },
+  { id: 'Zone_5_Charlottesville', position: [4, 0.5, -4] as const },
+  // Row 2
+  { id: 'Zone_6_Yakima', position: [-4, 0.5, 0] as const },
+  { id: 'Zone_7_Wenatchee', position: [-2, 0.5, 0] as const },
+  { id: 'Zone_8_Traverse_City', position: [0, 0.5, 0] as const },
+  { id: 'Zone_9_Hudson_Valley', position: [2, 0.5, 0] as const },
+  { id: 'Zone_10_Nagano', position: [4, 0.5, 0] as const },
+  // Row 3
+  { id: 'Zone_11_South_Tyrol', position: [-4, 0.5, 4] as const },
+  { id: 'Zone_12_Elgin', position: [-2, 0.5, 4] as const },
+  { id: 'Zone_13_Kent', position: [0, 0.5, 4] as const },
+  { id: 'Zone_14_Lerida', position: [2, 0.5, 4] as const },
+  { id: 'Zone_15_Hawkes_Bay', position: [4, 0.5, 4] as const },
 ];
 
 export default function AgDigitalTwin() {
@@ -39,7 +52,7 @@ export default function AgDigitalTwin() {
         .from("telemetry_logs")
         .select("*")
         .order("timestamp", { ascending: false })
-        .limit(20);
+        .limit(50);
 
       if (data) {
         const latest: Record<string, TelemetryLog> = {};
@@ -62,7 +75,9 @@ export default function AgDigitalTwin() {
     return () => { supabase.removeChannel(channel); };
   }, []);
 
-  const activeLogs = Object.values(logs).sort((a, b) => (a.zone_id > b.zone_id ? 1 : -1));
+  const activeLogs = Object.values(logs).sort((a, b) => 
+    a.zone_id.localeCompare(b.zone_id, undefined, { numeric: true, sensitivity: 'base' })
+  );
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 p-8 font-sans">
@@ -96,12 +111,12 @@ export default function AgDigitalTwin() {
 
                 return (
                   <group key={zone.id} position={zone.position}>
-                    <Box args={[2, 1, 2]}>
+                    <Box args={[1.2, 0.6, 1.2]}>
                       <meshStandardMaterial color={color} emissive={color} emissiveIntensity={isAlert ? 0.4 : 0} />
                     </Box>
-                    <Html position={[0, 1.5, 0]} center>
-                      <div className="text-xs font-mono bg-slate-950/80 px-2 py-1 rounded text-slate-300 pointer-events-none border border-slate-700 whitespace-nowrap">
-                        {zone.id.replace(/_/g, ' ')}
+                    <Html position={[0, 0.8, 0]} center>
+                      <div className="text-[10px] font-mono bg-slate-950/90 px-1.5 py-0.5 rounded text-slate-300 pointer-events-none border border-slate-800 whitespace-nowrap shadow-xl">
+                        {zone.id.split('_').slice(2).join(' ')}
                       </div>
                     </Html>
                   </group>
