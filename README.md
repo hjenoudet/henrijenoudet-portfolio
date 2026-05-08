@@ -66,6 +66,3 @@ npm run dev
 - **GitHub:** [@hjenoudet](https://github.com/hjenoudet)
 - **LinkedIn:** [Henri Jenoudet](https://linkedin.com/in/hjenoudet)
 - **Scholar:** [Google Scholar](https://scholar.google.com/citations?hl=en&user=yx-KdH0AAAAJ)
-
----
-*Built with precision. Distributed with love.*
